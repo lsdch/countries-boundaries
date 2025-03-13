@@ -18,12 +18,6 @@ jobs:
           enable-cache: true
       - name: Install the project
         run: uv sync --all-extras --dev
-      - name: Version bumper
-        uses: apowis/pyproject-bump-version@v0.0.1
-        with:
-          file_to_bump: "./pyproject.toml"
-          bump_type: "minor"
-          main_branch: "main"
       - name: Process dataset
         run: uv run scripts/processing.py
       - uses: ncipollo/release-action@v1
