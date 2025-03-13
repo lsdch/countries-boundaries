@@ -1,9 +1,14 @@
-on: [release]
+on:
+  push:
+    branches: [main]
+    tags:
+      - "*.*.*"
 name: Release
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -21,12 +26,6 @@ jobs:
           main_branch: "main"
       - name: Process dataset
         run: uv run scripts/processing.py
-      - name: Upload processed dataset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - uses: ncipollo/release-action@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./output/countries.json
-          asset_name: countries.json
-          asset_content_type: application/json
+          artifacts: "output/countries.json"
