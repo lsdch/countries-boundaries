@@ -22,4 +22,5 @@ jobs:
         run: uv run scripts/processing.py
       - uses: ncipollo/release-action@v1
         with:
+          commit: ${{ github.sha }}
           artifacts: "output/countries.json"
