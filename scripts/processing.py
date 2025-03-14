@@ -13,7 +13,10 @@ features.loc[features['UNION'] == 'Antarctica', 'SOVEREIGN1'] = 'Antarctica'
 features['CODE'] = features['ISO_TER1'].replace('', None).fillna(features['ISO_SOV1'])
 
 # Filter out territories that have ambiguous status: Joint regime or Overlapping claim)
-filtered = features[features['POL_TYPE'].isin(['Joint regime (EEZ)', 'Overlapping claim']).eq(False)]
+filtered = features[
+    ~features['POL_TYPE'].isin(['Joint regime (EEZ)', 'Overlapping claim']) |
+    features['ISO_TER1'].isin(["SGS", "ESH", "MYT", "FLK", "GIB" ])
+]
 
 dissolved = filtered[['CODE', 'geometry']].dissolve(by=['CODE'])
 
