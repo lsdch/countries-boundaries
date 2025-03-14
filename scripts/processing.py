@@ -21,7 +21,7 @@ print("Merged country boundaries:")
 print(dissolved)
 
 
-country_codes = pd.read_csv("data/country_codes.csv")[['name', 'alpha-2', 'alpha-3', 'country-code', 'sub-region']]
+country_codes = pd.read_csv("data/country_codes.csv")[['name', 'alpha-2', 'alpha-3', 'country-code', 'region', 'sub-region']]
 
 print("Processed dataset with ISO metadata:")
 merged = country_codes.merge(dissolved, left_on='alpha-3', right_on='CODE', how='left')
