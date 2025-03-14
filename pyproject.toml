@@ -30,5 +30,5 @@ message = "Bump version: {current_version} → {new_version}"
 moveable_tags = []
 commit_args = ""
 setup_hooks = []
-pre_commit_hooks = []
+pre_commit_hooks = ["uv lock"]
 post_commit_hooks = []
